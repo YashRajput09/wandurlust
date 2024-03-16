@@ -32,7 +32,7 @@ router.post(
       // so we can push newReview into reviews array of listings
       await newReview.save();
       await listing.save();
-  
+      req.flash("success", "New Review Created!");
       res.redirect(`/listings/${listing._id}`);
     })
   );
@@ -43,6 +43,7 @@ router.post(
     // console.log(id, " ", reviewID);
     await Listing.findByIdAndUpdate(id, {$pull: {reviewDetails: reviewID}})
     await Review.findByIdAndDelete(reviewID);
+    req.flash("success", "Review Deleted Successfully!");
     res.redirect(`/listings/${id}`);
   }));
 

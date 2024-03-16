@@ -5,6 +5,8 @@ const methodOverride = require("method-override");
 const path = require("path");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpresError.js");
+const session = require('express-session');
+const flash = require('connect-flash');
 
 const listings = require('./routes/listing.js');
 const reviews = require('./routes/review.js');
@@ -32,12 +34,33 @@ app.listen(port, () => {
 }
 dbConnection();
 
-app.use('/listings', listings); //listings is require above
-app.use('/listings/:id/reviews', reviews); //
+// define session options
+const sessionOptions = {
+  secret: "secrete code",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    expires: Date.now() + 28 * 24 * 60 * 60 * 1000,
+    maxAge: 28 * 24 * 60 * 60 * 1000,
+    httponly: true,
+  }
+}
 
 app.get("/", (req, res) => {
   res.send("working");
 });
+
+app.use(session(sessionOptions)); 
+app.use(flash());
+
+app.use((req, res, next) =>{
+  res.locals.successMsg = req.flash("success");
+  res.locals.errorMsg = req.flash("error")
+  next();
+});
+
+app.use('/listings', listings); //listings is require above
+app.use('/listings/:id/reviews', reviews); //
 
 // is request is not match to any route the this  will execute
 app.use("*", (req, res, next) => {
@@ -47,8 +70,7 @@ app.use("*", (req, res, next) => {
 // error handling middleware
 // deconstruct the err and send res.
 app.use((err, req, res, next) => {
-  let { statusCode = 500, message = "Somting went wrong. Please try again!" } =
-    err;
+  let { statusCode = 500, message = "Somting went wrong. Please try again!" } = err;
   console.log(err);
   res.render("error.ejs", { message, statusCode });
   // res.status(statusCode).send(message);

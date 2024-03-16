@@ -1,6 +1,6 @@
 const express  = require('express');
 const router = express.Router();
-console.log(router);
+// console.log(router);
 const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/ExpresError.js");
 const { listingSchema } = require("../schema.js"); // JOI schema 
@@ -42,7 +42,10 @@ router.get(
     wrapAsync(async (req, res) => {
       const { id } = req.params;
       const listing = await Listing.findById(id).populate("reviewDetails");
-      console.log();
+      if(!listing){
+        req.flash("error", "Requested Listing is not found.");
+        res.redirect('/listings');
+      }
       res.render("listings/show.ejs", { listing });
     })
   );
@@ -59,6 +62,7 @@ router.post(
       const newListing = new Listing(req.body.listing);
       await newListing.save();
       // console.log(listing);
+      req.flash("success", "New Listing Created!");
       res.redirect("/listings");
     })
   );
@@ -70,6 +74,10 @@ router.post(
       const { id } = req.params;
       // find listing by id,
       const listing = await Listing.findById(id);
+      if(!listing){
+        req.flash("error", "Requested listing does not exist.")
+        res.redirect('/listings');
+      }
       res.render("listings/edit.ejs", { listing });
       // res.send("working");
     })
@@ -87,6 +95,7 @@ router.post(
   
       await Listing.findByIdAndUpdate(id, { ...req.body.listing }); //deconstruct/destructure object and update  the fields that have been changed
       // redirect to the detail page for that listing
+      req.flash("success", "Listing Updated.")
       res.redirect(`/listings/${id}`);
     })
   );
@@ -98,6 +107,7 @@ router.post(
       let { id } = req.params;
       let deletedListing = await Listing.findByIdAndDelete(id);
       console.log(deletedListing);
+      req.flash("success", "Listing Deleted Successfully!");
       res.redirect("/listings");
     })
   );

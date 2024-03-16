@@ -12,7 +12,10 @@
 </head>
 <body>
     <%- include('../includes/navbar.ejs') %>
-    <div class="container big-container"><%- body -%></div>
+    <div class="container big-container">
+        <%- include('../includes/flash.ejs') %>
+        <%- body -%>
+    </div>
     
     <!-- Footer -->
     <%- include('../includes/footer.ejs') %>
