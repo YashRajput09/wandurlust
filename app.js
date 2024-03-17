@@ -7,9 +7,13 @@ const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpresError.js");
 const session = require('express-session');
 const flash = require('connect-flash');
+const passport = require('passport');
+const localStrategy = require('passport-local');
+const User = require('./models/user.js');
 
-const listings = require('./routes/listing.js');
-const reviews = require('./routes/review.js');
+const listingsRoute = require('./routes/listing.js');
+const reviewsRoute = require('./routes/review.js');
+const userRoute = require('./routes/user.js');
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -53,16 +57,33 @@ app.get("/", (req, res) => {
 app.use(session(sessionOptions)); 
 app.use(flash());
 
+app.use(passport.initialize()); // initializing Passport to work with Node.js application.
+app.use(passport.session());
+passport.use(new localStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+// app.use('/demo', async(req, res) => {
+//   let demoUser = new User({
+//     email: 'rajputyash@gmail.com',
+//     username: 'Ram Rajput',
+//   })
+//   let registedUser = await User.register(demoUser, "14324132");
+//   res.send(registedUser);
+// })
+
 app.use((req, res, next) =>{
   res.locals.successMsg = req.flash("success");
   res.locals.errorMsg = req.flash("error")
   next();
 });
 
-app.use('/listings', listings); //listings is require above
-app.use('/listings/:id/reviews', reviews); //
+app.use('/listings', listingsRoute); //listings is require above
+app.use('/listings/:id/reviews', reviewsRoute); //
+app.use('/', userRoute);
 
-// is request is not match to any route the this  will execute
+// if request is not match to any route the this  will execute
 app.use("*", (req, res, next) => {
   next(new ExpressError(404, "Page Not Found"));
 });
