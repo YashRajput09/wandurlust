@@ -58,7 +58,7 @@ app.use(session(sessionOptions));
 app.use(flash());
 
 app.use(passport.initialize()); // initializing Passport to work with Node.js application.
-app.use(passport.session());
+app.use(passport.session()); // sets up session support for Passport  so that it can persist login state in the user
 passport.use(new localStrategy(User.authenticate()));
 
 passport.serializeUser(User.serializeUser());
@@ -75,7 +75,8 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) =>{
   res.locals.successMsg = req.flash("success");
-  res.locals.errorMsg = req.flash("error")
+  res.locals.errorMsg = req.flash("error");
+  res.locals.currentUser = req.user;   //store to use in .ejs file, because locals  is accessible from all ejs files
   next();
 });
 
