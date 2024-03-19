@@ -41,11 +41,12 @@ router.get(
   "/:id",
   wrapAsync(async (req, res) => {
     const { id } = req.params;
-    const listing = await Listing.findById(id).populate("reviewDetails");
+    const listing = await Listing.findById(id).populate("reviewDetails").populate("owner"); // populate() replace the ID with the actual document
     if (!listing) {
       req.flash("error", "Requested Listing is not found.");
       res.redirect("/listings");
     }
+    // console.log(listing);
     res.render("listings/show.ejs", { listing });
   })
 );
@@ -61,6 +62,7 @@ router.post(
 
     //get data from req.body.linting create new listing,, listing  is an instance of our model
     const newListing = new Listing(req.body.listing);
+    newListing.owner = req.user._id; // save current(login) user's ID to owner field, so we know who created this listing, In request obj by default passport store user related info
     await newListing.save();
     // console.log(listing);
     req.flash("success", "New Listing Created!");
