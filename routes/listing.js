@@ -7,8 +7,6 @@ const { isLoggedIn, isOwner, validateListing } = require("../middleware.js");
 
 // console.log(Router);
 
-
-
 //Index route -----> show all listings route
 // '/listings' ----> '/'
 router.get(
@@ -31,7 +29,9 @@ router.get(
   "/:id",
   wrapAsync(async (req, res) => {
     const { id } = req.params;
-    const listing = await Listing.findById(id).populate("reviewDetails").populate("owner"); // populate() replace the ID with the actual document
+    const listing = await Listing.findById(id)
+      .populate({ path: "reviewDetails", populate: { path: "author" } })
+      .populate("owner"); // populate() replace the ID with the actual document
     if (!listing) {
       req.flash("error", "Requested Listing is not found.");
       res.redirect("/listings");

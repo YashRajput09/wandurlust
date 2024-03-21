@@ -1,4 +1,5 @@
 const Listing = require('./models/listing');
+const Review = require('./models/Review');
 const ExpressError = require("./utils/ExpresError.js");
 const { listingSchema } = require("./schema.js"); // JOI schema
 const { reviewSchema } = require("./schema.js"); //JOI schema
@@ -36,6 +37,19 @@ module.exports.isOwner = async(req, res, next) =>{
     }
     next();
 }
+
+module.exports.isReviewAuthor = async(req, res, next) =>{
+    let { id , reviewID } = req.params;
+    // console.log(reviewID);
+    let review = await Review.findById(reviewID);
+    // console.log(review);
+    if(!review.author._id.equals(res.locals.currentUser._id)){
+        req.flash("error", "You are not the Owner of this review");
+        return res.redirect(`/listings/${id}`);
+       }
+       next();
+    }
+
 
 module.exports.validateListing = (req, res, next) => {
     let { error } = listingSchema.validate(req.body);
