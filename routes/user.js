@@ -1,20 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/user");
 const wrapAsync = require("../utils/wrapAsync");
 const passport = require("passport");
 const { saveRedirectUrl } = require("../middleware");
 
 const listingController = require("../controllers/user");
 
-router.get("/signup", listingController.signUpForm);
+router.route("/signup")
+.get(listingController.signUpForm)
+.post(wrapAsync(listingController.signUpUser));
 
-router.post("/signup", wrapAsync(listingController.signUpUser));
-
-router.get("/login", listingController.logInForm);
-
-router.post(
-  "/login",
+router.route("/login")
+.get(listingController.logInForm)
+.post(
   saveRedirectUrl, //save the redirect url in session before logging in
   passport.authenticate("local", {
     failureRedirect: "/login",
