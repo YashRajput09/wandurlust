@@ -1,5 +1,9 @@
 const express = require("express");
 const router = express.Router();
+const multer = require('multer');
+const {storage} = require('../cloudConfig.js')
+const upload = multer({ storage }) //this is a folder name where we wants to save the pictures
+
 // console.log(router);
 const wrapAsync = require("../utils/wrapAsync.js");
 const { isLoggedIn, isOwner, validateListing } = require("../middleware.js");
@@ -13,6 +17,7 @@ router.route("/")
 .get(wrapAsync(listingController.index))  //Index route -----> show all listings route
 .post(                                    // create route                      
   isLoggedIn,
+  upload.single('listing[image]'),
   validateListing,
   wrapAsync(listingController.createNewListing)
 );

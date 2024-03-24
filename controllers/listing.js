@@ -25,14 +25,13 @@ module.exports.showListing = async (req, res) => {
 };
 
 module.exports.createNewListing = async (req, res, next) => {
-  // let { title, description, image, price, location, country} = req.body;
-  // let listing = req.body.listing;1
-
+  let url = req.file.path;
+  let filename = req.file.filename;
   //get data from req.body.linting create new listing,, listing  is an instance of our model
   const newListing = new Listing(req.body.listing);
   newListing.owner = req.user._id; // save current(login) user's ID to owner field, so we know who created this listing, In request obj by default passport store user related info
+  newListing.image = {url, filename};
   await newListing.save();
-  // console.log(listing);
   req.flash("success", "New Listing Created!");
   res.redirect("/listings");
 };

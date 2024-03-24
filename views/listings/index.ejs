@@ -6,7 +6,7 @@
     <% for(listings of allListings){%>
       <a href="/listings/<%=listings._id%>" class="listing-links">
         <div class="card listing-card col" >
-          <img src="<%= listings.image %>" class="card-img-top"  style="height: 20rem;" alt="Listing Image">
+          <img src="<%= listings.image.url %>" class="card-img-top"  style="height: 20rem;" alt="Listing Image">
           <!-- overlay -> img select effect  -->
           <div class="card-img-overlay"></div>
 
