@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const multer = require('multer');
-const {storage} = require('../cloudConfig.js')
-const upload = multer({ storage }) //this is a folder name where we wants to save the pictures
+const multer = require('multer');  // multer is use to parse data  from  form
+const {storage} = require('../cloudConfig.js');
+const upload = multer({ storage }); //this is a folder name where we wants to save the pictures
 
 // console.log(router);
 const wrapAsync = require("../utils/wrapAsync.js");
@@ -27,18 +27,19 @@ router.get("/new", isLoggedIn, listingController.newListingForm);
 
 router.route("/:id")
 .get(wrapAsync(listingController.showListing)) // show route
-.put(                                         // Edit route                   
+.put(                                         // Edit-update route                   
   isLoggedIn,
   isOwner,
+  upload.single('listing[image]'),
   validateListing,
   wrapAsync(listingController.updateListing)
 )
-.put(                     // update route
-  isLoggedIn,
-  isOwner,
-  validateListing,
-  wrapAsync(listingController.updateListing)
-)
+// .put(                     // update route
+//   isLoggedIn,
+//   isOwner,
+//   validateListing,
+//   wrapAsync(listingController.updateListing)
+// )
 .delete(                // Delete route
   isLoggedIn,
   isOwner,

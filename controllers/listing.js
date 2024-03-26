@@ -49,8 +49,16 @@ module.exports.editListingForm = async (req, res) => {
 };
 
 module.exports.updateListing = async (req, res) => {
+  console.log(req.body);
   let { id } = req.params;
-  await Listing.findByIdAndUpdate(id, { ...req.body.listing }); //deconstruct/destructure object and update  the fields that have been changed
+  let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing }); //deconstruct/destructure object and update  the fields that have been changed
+//  console.log(listing);
+  if(typeof req.file !== 'undefined'){
+  let url = req.file.path;
+  let filename = req.file.filename;
+  listing.image = { url, filename };
+  await listing.save();
+}
   // redirect to the detail page for that listing
   req.flash("success", "Listing Updated.");
   res.redirect(`/listings/${id}`);
