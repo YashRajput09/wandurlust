@@ -39,7 +39,15 @@
       </div>
 
       <div class="mb-3">
-        <label for="image" class="form-label">Upload new Image</label>
+        <label for="image" class="form-label">Old Image -</label>
+        <img
+          src="<%= originalImageUrl%>"
+          class="card-img-top show-img"
+          alt="Listing image"
+        />
+        </div>
+      <div class="mb-3">
+        <label for="image" class="form-label">Upload new Image -</label>
         <input
           type="file"
           name="listing[image]"
