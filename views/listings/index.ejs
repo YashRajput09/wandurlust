@@ -1,7 +1,70 @@
 
 <% layout('/layouts/boilerplate') -%>
+<style>
+#filters {
+  display: flex;
+  flex-wrap: wrap;
+  margin-block:  1em;
+}
+.filter {
+  text-align: center;
+  margin-inline: 1rem;
+  opacity: 0.7;
+}
+.filter:hover {
+  opacity: 1;
+}
+.filter i{
+  font-size: 3vh;
+}
+.filter p{
+  font-size: 0.8rem;
+}
+</style>
+
 <br>
-<h3>All Listings</h3>
+<div id="filters">
+  <div class="filter">
+    <div><i class="fa-solid fa-fire"></i></div>
+    <p>Trending</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-bed"></i></div>
+    <p>Rooms</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-mountain-city"></i></div>
+    <p>Iconic cities</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-regular fa-snowflake"></i></div>
+    <p>Snow</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-brands fa-fort-awesome"></i></i></div>
+    <p>Castales</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-person-swimming"></i></i></div>
+    <p>Amazing pools</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-sailboat"></i></div>
+    <p>Boats</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-tower-observation"></i></div>
+    <p>Towers</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-tents"></i></div>
+    <p>Camping</p>
+  </div>
+  <div class="filter">
+    <div><i class="fa-solid fa-wheat-awn"></i></div>
+    <p>Farms</p>
+  </div>
+</div>
 <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1">
     <% for(listings of allListings){%>
       <a href="/listings/<%=listings._id%>" class="listing-links">
