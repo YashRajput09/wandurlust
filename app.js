@@ -9,6 +9,7 @@ const path = require("path");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpresError.js");
 const session = require('express-session');
+const sessionStoreMongo = require('connect-mongo');
 const flash = require('connect-flash');
 const passport = require('passport');
 const localStrategy = require('passport-local');
@@ -17,6 +18,7 @@ const User = require('./models/user.js');
 const listingsRoute = require('./routes/listing.js');
 const reviewsRoute = require('./routes/review.js');
 const userRoute = require('./routes/user.js');
+const MongoStore = require("connect-mongo");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -26,9 +28,11 @@ app.engine("ejs", ejsMate); // use ejs-locals for all ejs templates:
 app.use(express.static(path.join(__dirname, "/public")));
 // console.log(app.set('views', path.join(__dirname, 'views')));
 
+const mongoDB_URL = 'mongodb://127.0.0.1:27017/wanderlust';
+
 async function dbConnection() {
   try{
-    await mongoose.connect("mongodb://127.0.0.1:27017/wanderlust");
+    await mongoose.connect(mongoDB_URL);
     console.log("Connected to Mongodb");
 
     const port = 8080;
@@ -41,21 +45,30 @@ app.listen(port, () => {
 }
 dbConnection();
 
+// store session data in MongoStore
+const sessionStore = MongoStore.create({
+  mongoUrl: mongoDB_URL,
+  crypto: {                 //encryption/decryption of session data,
+    secret: "secrete code",
+  },
+  touchAfter: 24 * 3600, // time in seconds after which the session will be updated
+})
+
+sessionStore.on("error", (error) =>{
+  console.log("ERROR IN MONGO SESSION STORE", error);
+})
 // define session options
 const sessionOptions = {
+  store: sessionStore,
   secret: "secrete code",
   resave: false,
   saveUninitialized: true,
   cookie: {
     expires: Date.now() + 28 * 24 * 60 * 60 * 1000,
     maxAge: 28 * 24 * 60 * 60 * 1000,
-    httponly: true,
+    httpOnly: true,
   }
 }
-
-app.get("/", (req, res) => {
-  res.send("working");
-});
 
 app.use(session(sessionOptions)); 
 app.use(flash());
@@ -88,9 +101,9 @@ app.use('/listings/:id/reviews', reviewsRoute); //
 app.use('/', userRoute);
 
 // if request is not match to any route the this  will execute
-app.use("*", (req, res, next) => {
-  next(new ExpressError(404, "Page Not Found"));
-});
+// app.use("*", (req, res, next) => {
+//   next(new ExpressError(404, "Page Not Found"));
+// });
 
 // error handling middleware
 // deconstruct the err and send res.
