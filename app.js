@@ -46,7 +46,7 @@ app.listen(port, () => {
 dbConnection();
 
 // store session data in MongoStore
-const sessionStore = MongoStore.create({
+const sessionStore = sessionStoreMongo.create({
   mongoUrl: mongoDB_URL,
   crypto: {                 //encryption/decryption of session data,
     secret: "secrete code",
