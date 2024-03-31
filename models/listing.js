@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const Review = require("./Review.js");
+const { number } = require("joi");
 // const User = require('./user.js')
 
 //  Define the User schema
@@ -29,6 +30,17 @@ const listingSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   },
+  geometry: {
+    type: {
+      type: String,
+    enum: ['Point'], //'location.type' must be 'Point'
+    required: true,
+  },
+  coordinates: {
+    type: [Number],
+    required: true,
+  }
+},
 });
 
 listingSchema.post("findOneAndDelete", async (listing) => {

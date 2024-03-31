@@ -1,4 +1,8 @@
+const { query } = require("express");
 const Listing = require("../models/listing.js");
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+const mapBoxToken = process.env.MAP_PUBLIC_TOKEN;
+const geocodingClient = mbxGeocoding({ accessToken: mapBoxToken });
 
 module.exports.index = async (req, res) => {
   //find all listings in the database and send them back as a response
@@ -25,12 +29,18 @@ module.exports.showListing = async (req, res) => {
 };
 
 module.exports.createNewListing = async (req, res, next) => {
+  let getCoordinates = await geocodingClient.forwardGeocode({
+    query: req.body.listing.location,
+    limit: 1,
+  }).send();
+
   let url = req.file.path;
   let filename = req.file.filename;
   //get data from req.body.linting create new listing,, listing  is an instance of our model
   const newListing = new Listing(req.body.listing);
   newListing.owner = req.user._id; // save current(login) user's ID to owner field, so we know who created this listing, In request obj by default passport store user related info
   newListing.image = {url, filename};
+  newListing.geometry = getCoordinates.body.features[0].geometry;  //save coordinates to db
   await newListing.save();
   req.flash("success", "New Listing Created!");
   res.redirect("/listings");
