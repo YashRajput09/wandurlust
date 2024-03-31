@@ -108,3 +108,11 @@ body{
     display: flex;
     gap:  1rem;
 }
+
+/* map styling */
+
+#map{
+    width: 100%;
+    height: 50vh;
+    border-radius: 10px;
+}

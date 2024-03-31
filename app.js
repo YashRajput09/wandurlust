@@ -18,7 +18,6 @@ const User = require('./models/user.js');
 const listingsRoute = require('./routes/listing.js');
 const reviewsRoute = require('./routes/review.js');
 const userRoute = require('./routes/user.js');
-const MongoStore = require("connect-mongo");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
