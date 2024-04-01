@@ -2,7 +2,7 @@
 <!-- this file js code is run before the map.js file code, because we require map.js file in the last  -->
 <script>
   const mapAccessToken = "<%=process.env.MAP_PUBLIC_TOKEN %>"; //public/javascripts files directly can not access enviroment variables
-  const coordinates = <%- JSON.stringify(listing.geometry.coordinates) %>;
+  const listing = <%- JSON.stringify(listing) %>;
 </script>
 <div class="row">
   <div class="col-8 offset-2 mt-3">
