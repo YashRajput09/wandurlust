@@ -99,12 +99,16 @@
           <p class="starability-result card-text" data-rating= <%= review.rating %>>
           </p>
           <p class="card-text"><%= review.comment %></p>
-          <form
+
+          <!-- if the user is not the author of review, he can can not see review delete buttton -->
+          <% if (currentUser && currentUser._id.equals(review.author._id)) { %>
+            <form
             method="POST"
             action="/listings/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE"
-          >
+            >
             <button class="btn btn-danger btn-sm">Delete</button>
           </form>
+          <% } %>
         </div>
       </div>
       <% } %>

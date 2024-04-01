@@ -100,9 +100,9 @@ app.use('/listings/:id/reviews', reviewsRoute); //
 app.use('/', userRoute);
 
 // if request is not match to any route the this  will execute
-// app.use("*", (req, res, next) => {
-//   next(new ExpressError(404, "Page Not Found"));
-// });
+app.use("*", (req, res, next) => {
+  next(new ExpressError(404, "Page Not Found"));
+});
 
 // error handling middleware
 // deconstruct the err and send res.
@@ -110,6 +110,4 @@ app.use((err, req, res, next) => {
   let { statusCode = 500, message = "Somting went wrong. Please try again!" } = err;
   console.log(err);
   res.render("error.ejs", { message, statusCode });
-  // res.status(statusCode).send(message);
-  // res.send("somthing went wrong");
 });
