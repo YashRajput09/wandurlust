@@ -5,8 +5,28 @@ const mapBoxToken = process.env.MAP_PUBLIC_TOKEN;
 const geocodingClient = mbxGeocoding({ accessToken: mapBoxToken });
 
 module.exports.index = async (req, res) => {
+  // get value  of the search parameter from URL and store it in searchQuery variable
+  let searchQuery = '';
+  if(req.query.search){             
+    searchQuery = req.query.search; 
+  }
+
   //find all listings in the database and send them back as a response
-  const allListings = await Listing.find({});
+  const allListings = await Listing.find({
+
+    // search listings  by title, country or location using regex
+    //$or is  used to perform OR operation on an array of (3)sub-queries, atlist one match 
+    //$regex is used to match  strings(searhQuery) anywhere within a string(title)
+    // $options: 'i; is used to make pattern case-insenstive 
+    //'.*' means that there can be anything before or after the letter it will match, '.*' pattern is used to match any character zero or more times,
+    // like 't' letter match with 'match' word, because 'match' word have t word  inside it
+    $or: [   
+        { title: {$regex: '.*'+searchQuery+'.*', $options:'i'}},   
+        { country: {$regex: '.*'+searchQuery+'.*', $options:'i'}},
+        { location: {$regex: '.*'+searchQuery+'.*', $options:'i'}}
+    ]
+  });
+  // req.flash("error", "Requested Listing is not found.");
   res.render("listings/index.ejs", { allListings });
   // res.send("working..")
 };
@@ -16,6 +36,10 @@ module.exports.newListingForm = (req, res) => {
 };
 
 module.exports.showListing = async (req, res) => {
+  
+  // var search = '';
+  // if()
+
   const { id } = req.params;
   const listing = await Listing.findById(id)
     .populate({ path: "reviewDetails", populate: { path: "author" } })
