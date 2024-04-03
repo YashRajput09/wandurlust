@@ -1,8 +1,8 @@
 <% layout('/layouts/boilerplate') -%>
 
 <!-- <body> -->
-<div class="row">
-  <div class="col-8 offset-2">
+<div class="row ">
+  <div class="col-8 offset-2 ">
     <br />
     <form method="post" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
       <div class="mb-3">
@@ -64,7 +64,8 @@
         </div>
       </div>
 
-      <div class="mb-3">
+      <div class="row">
+      <div class="mb-3 ">
         <label for="location" class="form-label">Location</label>
         <input
           type="text"
@@ -76,7 +77,12 @@
         <div class="invalid-feedback">Enter valid location</div>
       </div>
 
-      <button class="btn btn-dark add-btn">Add Details</button>
+
+    </div> 
+
+    
+
+      <button class="btn btn-dark add-btn mb-5">Add Details</button>
       <br />
       <br />
     </form>

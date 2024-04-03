@@ -39,15 +39,16 @@ const listingSchema = new Schema({
   coordinates: {
     type: [Number],
     required: true,
-  }
+  },
 },
+
 });
 
-listingSchema.post("findOneAndDelete", async (listing) => {
-  if (listing) {
-    await Review.deleteMany({ _id: { $in: listing.reviewDetails } });
-  }
-});
+// listingSchema.post("findOneAndDelete", async (listing) => {
+//   if (listing) {
+//     await Review.deleteMany({ _id: { $in: listing.reviewDetails } });
+//   }
+// });
 
 const Listing = mongoose.model("Listing", listingSchema);
 
