@@ -97,7 +97,20 @@
           <div class="invalid-feedback">Enter valid location</div>
         </div>
 
-       
+        <div class="mb-3 col-md-4">
+          <label for="category" class="form-label">Category</label>
+          <select class="form-select form-select-md mb-3" name="listing[category]" value="<%= listing.category%>">
+            <option selected>Select Category</option>
+            <option value="Rooms">Rooms</option>
+            <option value="Iconic Cities">Iconic cities</option>
+            <option value="Snow">Snow</option>
+            <option value="Castales">Castales</option>
+            <option value="Amazing Pools">Amazing pools</option>    
+            <option value="Boats">Boats</option>    
+            <option value="Tower">Tower</option>    
+            <option value="Farms">Farms</option>    
+          </select>
+        </div>
       </div>
         
         <button class="btn add-btn">Add</button>
