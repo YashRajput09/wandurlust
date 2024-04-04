@@ -3,6 +3,7 @@ if(process.env.NODE_ENV != "production"){
 }
 const express = require("express");
 const app = express();
+// app.use(express.json());
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const path = require("path");

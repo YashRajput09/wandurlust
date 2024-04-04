@@ -83,21 +83,24 @@
           <div class="invalid-feedback">Provide valid country name</div>
         </div>
       </div>
-
-      <div class="mb-3">
-        <label for="location" class="form-label">Location</label>
-        <input
+      <div class="row">
+        <div class="mb-3 col-md-8">
+          <label for="location" class="form-label">Location</label>
+          <input
           type="text"
           name="listing[location]"
           value="<%= listing.location %>"
           class="form-control"
           placeholder="location"
           required
-        />
-        <div class="invalid-feedback">Enter valid location</div>
-      </div>
+          />
+          <div class="invalid-feedback">Enter valid location</div>
+        </div>
 
-      <button class="btn add-btn">Add</button>
+       
+      </div>
+        
+        <button class="btn add-btn">Add</button>
       <br /><br />
     </form>
   </div>

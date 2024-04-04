@@ -2,6 +2,7 @@ const { query } = require("express");
 const Listing = require("../models/listing.js");
 const { generateSearchQuery, handleSearch } = require('../utils/search.js')
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+const { logInForm } = require("./user.js");
 const mapBoxToken = process.env.MAP_PUBLIC_TOKEN;
 const geocodingClient = mbxGeocoding({ accessToken: mapBoxToken });
 
@@ -13,9 +14,12 @@ module.exports.index = async (req, res) => {
   const searchListings = generateSearchQuery(searchQuery);
 
   //find all listings in the database and send them back as a response
-   const allListings  = await Listing.find(searchListings);
+   const allListings = await Listing.find(searchListings);
+  //  console.log(allListings);
 
-  res.render("listings/index.ejs", { allListings });
+res.render("listings/index.ejs",  { allListings: allListings});
+// console.log({ allListings: allListings, filteredListings: [] });
+
   // await handleSearch(req, res, Listing); ////
 };
 
@@ -55,7 +59,7 @@ module.exports.createNewListing = async (req, res, next) => {
   newListing.owner = req.user._id; // save current(login) user's ID to owner field, so we know who created this listing, In request obj by default passport store user related info
   newListing.image = {url, filename};
   newListing.geometry = getCoordinates.body.features[0].geometry;  //save coordinates to db
-  
+  newListing.category =  req.body.listing.category;
   await newListing.save();
   // console.log("NEW LISTING : ",newListing);
   req.flash("success", "New Listing Created!");
