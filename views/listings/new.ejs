@@ -1,10 +1,15 @@
 <% layout('/layouts/boilerplate') -%>
 
-<!-- <body> -->
-<div class="row ">
-  <div class="col-8 offset-2 ">
+<div class="row">
+  <div class="col-8 offset-2">
     <br />
-    <form method="post" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
+    <form
+      method="post"
+      action="/listings"
+      novalidate
+      class="needs-validation"
+      enctype="multipart/form-data"
+    >
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>
         <input
@@ -65,36 +70,37 @@
       </div>
 
       <div class="row">
-      <div class="mb-3 col-md-8">
-        <label for="location" class="form-label">Location</label>
-        <input
-          type="text"
-          name="listing[location]"
-          class="form-control"
-          placeholder="eg: Indore, MadhyaPradesh"
-          required
-        />
-        <div class="invalid-feedback">Enter valid location</div>
-      </div>
+        <div class="mb-3 col-md-8">
+          <label for="location" class="form-label">Location</label>
+          <input
+            type="text"
+            name="listing[location]"
+            class="form-control"
+            placeholder="eg: Indore, MadhyaPradesh"
+            required
+          />
+          <div class="invalid-feedback">Enter valid location</div>
+        </div>
 
-      <div class="mb-3 col-md-4">
-        <label for="category" class="form-label">Category</label>
-        <select class="form-select form-select-md mb-3" name="listing[category]">
-          <option selected>Select Category</option>
-          <option value="Rooms">Rooms</option>
-          <option value="Iconic Cities">Iconic cities</option>
-          <option value="Snow">Snow</option>
-          <option value="Castales">Castales</option>
-          <option value="Amazing Pools">Amazing pools</option>    
-          <option value="Boats">Boats</option>    
-          <option value="Tower">Tower</option>    
-          <option value="Camping">Camping</option>    
-          <option value="Farms">Farms</option>    
-        </select>
+        <div class="mb-3 col-md-4">
+          <label for="category" class="form-label">Category</label>
+          <select
+            class="form-select form-select-md mb-3"
+            name="listing[category]"
+          >
+            <option selected>Select Category</option>
+            <option value="Rooms">Rooms</option>
+            <option value="Iconic Cities">Iconic cities</option>
+            <option value="Snow">Snow</option>
+            <option value="Castales">Castales</option>
+            <option value="Amazing Pools">Amazing pools</option>
+            <option value="Boats">Boats</option>
+            <option value="Tower">Tower</option>
+            <option value="Camping">Camping</option>
+            <option value="Farms">Farms</option>
+          </select>
+        </div>
       </div>
-    </div> 
-
-    
 
       <button class="btn btn-dark add-btn mb-5">Add Details</button>
       <br />
@@ -102,4 +108,3 @@
     </form>
   </div>
 </div>
-<!-- </body> -->

@@ -1,5 +1,6 @@
 
 <% layout('/layouts/boilerplate') -%>
+
 <br>
 <form action="/listings/category" method="GET">
 <div id="filters">
@@ -99,20 +100,3 @@
         </a>
     <% } %> 
 </div>
-                  
-    <script>
-      let taxSwitch = document.querySelector('#flexSwitchCheckDefault');
-      taxSwitch.addEventListener('click', () =>{
-        // console.log("button clicked");
-        let taxInfo = document.getElementsByClassName('tax-info');
-        // console.log(taxInfo);
-        for(info of taxInfo){
-        if (info.style.display != 'inline') {
-          info.style.display = 'inline';
-        } else{
-          info.style.display = 'none';
-        }
-      }
-      })
-
-    </script>

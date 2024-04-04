@@ -1,6 +1,5 @@
 <% layout('/layouts/boilerplate') -%>
 
-<!-- <body> -->
 <div class="row">
   <div class="col-md-8 offset-2">
     <br />
@@ -45,14 +44,10 @@
           class="card-img-top show-img"
           alt="Listing image"
         />
-        </div>
+      </div>
       <div class="mb-3">
         <label for="image" class="form-label">Upload new Image -</label>
-        <input
-          type="file"
-          name="listing[image]"
-          class="form-control"
-        />
+        <input type="file" name="listing[image]" class="form-control" />
         <div class="invalid-feedback">Please enter image URL</div>
       </div>
 
@@ -87,36 +82,39 @@
         <div class="mb-3 col-md-8">
           <label for="location" class="form-label">Location</label>
           <input
-          type="text"
-          name="listing[location]"
-          value="<%= listing.location %>"
-          class="form-control"
-          placeholder="location"
-          required
+            type="text"
+            name="listing[location]"
+            value="<%= listing.location %>"
+            class="form-control"
+            placeholder="location"
+            required
           />
           <div class="invalid-feedback">Enter valid location</div>
         </div>
 
         <div class="mb-3 col-md-4">
           <label for="category" class="form-label">Category</label>
-          <select class="form-select form-select-md mb-3" name="listing[category]" value="<%= listing.category%>">
+          <select
+            class="form-select form-select-md mb-3"
+            name="listing[category]"
+            value="<%= listing.category%>"
+          >
             <option selected>Select Category</option>
             <option value="Rooms">Rooms</option>
             <option value="Iconic Cities">Iconic cities</option>
             <option value="Snow">Snow</option>
             <option value="Castales">Castales</option>
-            <option value="Amazing Pools">Amazing pools</option>    
-            <option value="Boats">Boats</option>    
-            <option value="Tower">Tower</option>    
-            <option value="Camping">Camping</option>    
-            <option value="Farms">Farms</option>    
+            <option value="Amazing Pools">Amazing pools</option>
+            <option value="Boats">Boats</option>
+            <option value="Tower">Tower</option>
+            <option value="Camping">Camping</option>
+            <option value="Farms">Farms</option>
           </select>
         </div>
       </div>
-        
-        <button class="btn add-btn">Add</button>
+
+      <button class="btn add-btn">Add</button>
       <br /><br />
     </form>
   </div>
 </div>
-<!-- </body> -->
