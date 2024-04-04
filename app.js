@@ -15,6 +15,7 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const localStrategy = require('passport-local');
 const User = require('./models/user.js');
+const Listing = require("./models/listing.js"); ////
 
 const listingsRoute = require('./routes/listing.js');
 const reviewsRoute = require('./routes/review.js');
@@ -94,11 +95,21 @@ app.use((req, res, next) =>{
   res.locals.errorMsg = req.flash("error");
   res.locals.currentUser = req.user;   //store to use in .ejs file, because locals  is accessible from all ejs files
   next();
-});
+}); 
+app.use('/listings/category', async (req, res) =>{
+  const { category } = req.query;
+  const filteredListings = await Listing.find({ category });
+  console.log(filteredListings); 
+  // console.log("Working...");
+  // console.log("Listing data send  ");
+  res.render("listings/category.ejs", { filteredListings: filteredListings });
 
+  // res.send("working");
+})
 app.use('/listings', listingsRoute); //listings is require above
 app.use('/listings/:id/reviews', reviewsRoute); //
 app.use('/', userRoute);
+
 
 // if request is not match to any route the this  will execute
 // app.use("*", (req, res, next) => {

@@ -49,4 +49,9 @@ router.get(
   wrapAsync(listingController.editListingForm)
 );
 
+router.get(
+  "/category",
+  wrapAsync (listingController.categoryListins)
+)
+
 module.exports = router;

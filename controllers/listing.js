@@ -15,10 +15,8 @@ module.exports.index = async (req, res) => {
 
   //find all listings in the database and send them back as a response
    const allListings = await Listing.find(searchListings);
-  //  console.log(allListings);
 
-res.render("listings/index.ejs",  { allListings: allListings});
-// console.log({ allListings: allListings, filteredListings: [] });
+res.render("listings/index.ejs", { allListings: allListings});
 
   // await handleSearch(req, res, Listing); ////
 };

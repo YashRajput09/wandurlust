@@ -128,9 +128,9 @@
 
 
 
-<!-- all listings -->
+<!-- filtered listings -->
 <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1">
-    <% for(listing of allListings){ %>
+    <% for(listing of filteredListings){ %>
 
         <a href="/listings/<%=listing._id%>" class="listing-links">
             <div class="card listing-card col">
