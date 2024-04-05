@@ -29,11 +29,12 @@ app.engine("ejs", ejsMate); // use ejs-locals for all ejs templates:
 app.use(express.static(path.join(__dirname, "/public")));
 // console.log(app.set('views', path.join(__dirname, 'views')));
 
-const mongoDB_URL = 'mongodb://127.0.0.1:27017/wanderlust';
+// const dbUrl = 'mongodb://127.0.0.1:27017/wanderlust';
+const dbUrl = process.env.ATLASDB_URL;
 
 async function dbConnection() {
   try{
-    await mongoose.connect(mongoDB_URL);
+    await mongoose.connect(dbUrl);
     console.log("Connected to Mongodb");
 
     const port = 8080;
@@ -48,9 +49,9 @@ dbConnection();
 
 // store session data in MongoStore
 const sessionStore = sessionStoreMongo.create({
-  mongoUrl: mongoDB_URL,
+  mongoUrl: dbUrl,
   crypto: {                 //encryption/decryption of session data,
-    secret: "secrete code",
+    secret: process.env.SECRET,
   },
   touchAfter: 24 * 3600, // time in seconds after which the session will be updated
 })
@@ -81,31 +82,13 @@ passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// app.use('/demo', async(req, res) => {
-//   let demoUser = new User({
-//     email: 'rajputyash@gmail.com',
-//     username: 'Ram Rajput',
-//   })
-//   let registedUser = await User.register(demoUser, "14324132");
-//   res.send(registedUser);
-// })
-
 app.use((req, res, next) =>{
   res.locals.successMsg = req.flash("success");
   res.locals.errorMsg = req.flash("error");
   res.locals.currentUser = req.user;   //store to use in .ejs file, because locals  is accessible from all ejs files
   next();
 }); 
-// app.use('/listings/category', async (req, res) =>{
-//   const  { category }  = req.query;
-//   const filteredListings = await Listing.find({ category });
-//   console.log(filteredListings); 
-//   // console.log("Working...");
-//   // console.log("Listing data send  ");
-//   res.render("listings/category.ejs", { filteredListings: filteredListings });
 
-//   // res.send("working");
-// })
 app.use('/listings', listingsRoute); //listings is require above
 app.use('/listings/:id/reviews', reviewsRoute); //
 app.use('/', userRoute);
