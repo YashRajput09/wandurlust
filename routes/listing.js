@@ -22,9 +22,15 @@ router.route("/")
   wrapAsync(listingController.createNewListing)
 );
 
+
 // new route
 router.get("/new", isLoggedIn, listingController.newListingForm);
 
+router.get(
+  "/category",
+  wrapAsync (listingController.categoryListings),
+  )
+  
 router.route("/:id")
 .get(wrapAsync(listingController.showListing)) // show route
 .put(                                         // Edit-update route                   
@@ -49,9 +55,7 @@ router.get(
   wrapAsync(listingController.editListingForm)
 );
 
-router.get(
-  "/category",
-  wrapAsync (listingController.categoryListins)
-)
+// console.log("came here", listingController)
+
 
 module.exports = router;

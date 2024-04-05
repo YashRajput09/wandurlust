@@ -15,7 +15,7 @@ module.exports.index = async (req, res) => {
 
   //find all listings in the database and send them back as a response
    const allListings = await Listing.find(searchListings);
-
+   
 res.render("listings/index.ejs", { allListings: allListings});
 
   // await handleSearch(req, res, Listing); ////
@@ -105,3 +105,9 @@ module.exports.deleteListing = async (req, res) => {
   req.flash("success", "Listing Deleted Successfully!");
   res.redirect("/listings");
 };
+
+module.exports.categoryListings =  async (req, res) =>{
+  const  { category }  = req.query;
+  const filteredListings = await Listing.find({ category });
+  res.render("listings/category.ejs", { filteredListings: filteredListings });
+}

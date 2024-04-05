@@ -96,16 +96,16 @@ app.use((req, res, next) =>{
   res.locals.currentUser = req.user;   //store to use in .ejs file, because locals  is accessible from all ejs files
   next();
 }); 
-app.use('/listings/category', async (req, res) =>{
-  const { category } = req.query;
-  const filteredListings = await Listing.find({ category });
-  console.log(filteredListings); 
-  // console.log("Working...");
-  // console.log("Listing data send  ");
-  res.render("listings/category.ejs", { filteredListings: filteredListings });
+// app.use('/listings/category', async (req, res) =>{
+//   const  { category }  = req.query;
+//   const filteredListings = await Listing.find({ category });
+//   console.log(filteredListings); 
+//   // console.log("Working...");
+//   // console.log("Listing data send  ");
+//   res.render("listings/category.ejs", { filteredListings: filteredListings });
 
-  // res.send("working");
-})
+//   // res.send("working");
+// })
 app.use('/listings', listingsRoute); //listings is require above
 app.use('/listings/:id/reviews', reviewsRoute); //
 app.use('/', userRoute);
