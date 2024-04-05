@@ -1,8 +1,8 @@
 const { query } = require("express");
 const Listing = require("../models/listing.js");
 const { generateSearchQuery, handleSearch } = require('../utils/search.js')
-const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const { logInForm } = require("./user.js");
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapBoxToken = process.env.MAP_PUBLIC_TOKEN;
 const geocodingClient = mbxGeocoding({ accessToken: mapBoxToken });
 
