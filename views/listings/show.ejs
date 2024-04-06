@@ -5,11 +5,12 @@
   const listing = <%- JSON.stringify(listing) %>;
 </script>
 <div class="row">
-  <div class="col-8 offset-2 mt-3">
-    <h3><b><%= listing.title %></b> <br /></h3>
+  <!-- <div class="col-8 offset-2 mt-3"> -->
+  <div class="offset-md-1 offset-lg-2 col-xs-12 col-sm-12 col-md-10 col-lg-8 mb-3">
+  <h3><b><%= listing.title %></b> <br /></h3>
   </div>
 
-  <div class="card listing-card col-8 offset-2">
+  <div class="card listing-card offset-md-1 offset-lg-2 col-xs-12 col-sm-12 col-md-10 col-lg-8 ">
     <img
       src="<%= listing.image.url %>"
       class="card-img-top show-img"
@@ -41,7 +42,14 @@
     <% } %>
   </div>
 
-  <div class="col-8 offset-2 mb-3">
+  <!-- map -->
+  <div class="offset-md-1 offset-lg-2 col-xs-12 col-sm-12 col-md-10 col-lg-8 mb-3">
+    <h3>Where you will be</h3>
+    <div id="map"></div>
+  </div>
+  
+ <!-- Rating and Review -->
+  <div class="offset-md-1 offset-lg-2 col-xs-12 col-sm-12 col-md-10 col-lg-8 mb-3">
     <% if(currentUser){%>
       <hr />
     <h4>Rating and Reviews</h4>
@@ -51,7 +59,6 @@
       novalidate
       class="needs-validation"
     >
-    
     
     <div class="mb-3">
       <label for="rating" class="form-label">Rate this place</label>
@@ -94,12 +101,12 @@
     <div class="row">
       <p><b>All Ratings and Reviews</b></p>
       <% for(review of listing.reviewDetails){ %>
-      <div class="card mb-3 col-5 ms-3">
+      <div class="card col-8 col-sm-8 col-md-5  m-3">
         <div class="card-body">
-          <h5 class="card-title"><%= review.author.username %></h5>
+          <h5 class="card-title fs-6 fw-bold"><%= review.author.username %></h5>
           <p class="starability-result card-text" data-rating= <%= review.rating %>>
           </p>
-          <p class="card-text"><%= review.comment %></p>
+          <p class="card-text fs-8"><%= review.comment %></p>
 
           <!-- if the user is not the author of review, he can can not see review delete buttton -->
           <% if (currentUser && currentUser._id.equals(review.author._id)) { %>
@@ -115,10 +122,6 @@
       <% } %>
     </div>
     <% } %>
-  </div>
-  <div class="col-8 offset-2 mb-3">
-    <h3>Where you will be</h3>
-    <div id="map"></div>
   </div>
 </div>
 

@@ -29,8 +29,8 @@ app.engine("ejs", ejsMate); // use ejs-locals for all ejs templates:
 app.use(express.static(path.join(__dirname, "/public")));
 // console.log(app.set('views', path.join(__dirname, 'views')));
 
-// const dbUrl = 'mongodb://127.0.0.1:27017/wanderlust';
-const dbUrl = process.env.ATLASDB_URL;
+const dbUrl = 'mongodb://127.0.0.1:27017/wanderlust';
+// const dbUrl = process.env.ATLASDB_URL;
 
 async function dbConnection() {
   try{
@@ -89,9 +89,9 @@ app.use((req, res, next) =>{
   next();
 }); 
 
-app.use('/', userRoute);
 app.use('/listings', listingsRoute); //listings is require above
 app.use('/listings/:id/reviews', reviewsRoute); //
+app.use('/', userRoute);
 
 
 // if request is not match to any route the this  will execute
