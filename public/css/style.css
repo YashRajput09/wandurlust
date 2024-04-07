@@ -14,7 +14,7 @@ body{
 
 .navbar{
     height: 4.5rem;
-    padding-inline: 2rem !important;
+    /* padding-inline: 2rem !important; */
     background-color: #fff;
 }
 
@@ -120,10 +120,15 @@ body{
 /* category section styling */
 
 #filters {
+    max-height: 80px;
     display: flex;
-    flex-wrap: wrap;
-    margin-block:  1em;
+    /* flex-wrap: wrap; */
+    /* margin-block:  1em; */
     align-items: center;
+    overflow-x: auto;
+  }
+  #filters::-webkit-scrollbar {
+    width: 0;
   }
   .filter {
     text-align: center;
@@ -138,7 +143,8 @@ body{
   }
   .filter p{
     font-size: 0.8rem;
-    margin: 0;
+    text-wrap: nowrap;
+    /* margin: 0; */
   }
   
   .filter button{
@@ -146,6 +152,7 @@ body{
     background-color: transparent;
     padding: 0;
   }
+
   .tax-toggle{
     border: 1px solid #00000063;
     border-radius: 12px;

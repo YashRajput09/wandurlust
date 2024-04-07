@@ -1,5 +1,5 @@
 <style>
-  .search-btn{
+  .search-btn {
     background-color: #fe424d;
     color: #fff;
     display: flex;
@@ -7,23 +7,30 @@
     border-radius: 25px;
     padding: 0 1rem;
   }
-  .search-btn:hover{
+  .search-btn:hover {
     background-color: #fe424d;
     color: #fff;
   }
-  .search-btn i{
+  .search-btn i {
     margin-right: 0.5rem;
   }
 
-  .search-input{
+  .search-input {
     border-radius: 25px;
     padding: 0.5rem 3rem;
   }
 </style>
 
-<nav class="container-fluid navbar navbar-expand-md bg-body-light sticky-top border-bottom">
-  <div class="container-fluid bg-white rounded-3 ">
-    <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
+<nav
+  class="container-fluid navbar navbar-expand-md bg-body-light sticky-top border-bottom px-md-4"
+>
+  <div class="container-fluid bg-white rounded-3">
+    <a class="navbar-brand" href="/listings"
+      ><i class="fa-regular fa-compass"></i
+    ></a>
+    <div class="navbar-nav">
+      <a class="nav-link" href="/listings">Wanderlust</a>
+    </div>
     <button
       class="navbar-toggler fa fa-bars fa-2"
       type="button"
@@ -33,14 +40,18 @@
       <!-- <span class="navbar-toggler-icon"></span> -->
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link" href="/listings">Wanderlust</a>
-      </div>
-              <!-- search -->
-      <div class="navbar-nav ms-auto">
-        <form class="d-flex" role="search">
-          <input class="form-control me-2 search-input" type="search" placeholder="Search destination" name="search">
-          <button class="btn search-btn" type="submit" value="search"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+      <!-- search -->
+      <div class="navbar-nav ms-auto mt-3">
+        <form class="d-flex " role="search">
+          <input
+            class="form-control me-2 search-input"
+            type="search"
+            placeholder="Search destination"
+            name="search"
+          />
+          <button class="btn search-btn" type="submit" value="search">
+            <i class="fa-solid fa-magnifying-glass"></i> Search
+          </button>
         </form>
       </div>
 

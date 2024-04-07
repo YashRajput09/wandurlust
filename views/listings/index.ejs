@@ -3,6 +3,8 @@
 
 <br>
 <form action="/listings/category" method="GET">
+  <div class="row justify-content-between">
+<!-- <div id="filters" class="col-md-8 col-lg-9"> -->
 <div id="filters">
   <div class="filter">
     <button type="submit" name="category" value="Trending">
@@ -64,15 +66,39 @@
     <button type="submit" name="category" value="Farms">
       <div><i class="fa-solid fa-wheat-awn"></i></div>
       <p>Farms</p>
-    </button>
+    </button>   
   </div>
-
-  <div class="tax-toggle">
-    <div class="form-check form-switch form-check-reverse tax-toggle-child">
+  <div class="filter">
+    <button type="submit" name="category" value="Mountain">
+      <div><i class="fa-solid fa-mountain-sun"></i></div>
+      <p>Mountain</p>
+    </button>   
+  </div>
+  <div class="filter">
+    <button type="submit" name="category" value="Lake">
+      <div><i class="fa-solid fa-water"></i></div>
+      <p>Lake</p>
+    </button>   
+  </div>
+  <div class="filter">
+    <button type="submit" name="category" value="Play">
+      <div><i class="fa-brands fa-battle-net"></i></div>
+      <p>Play</p>
+    </button>   
+  </div>
+  <div class="filter">
+    <button type="submit" name="category" value="Top of the world">
+      <div><i class="fa-solid fa-school-flag"></i></div>
+      <p>Top of the world</p>
+    </button>   
+  </div>
+</div>
+  <!-- <div class="tax-toggle mb-2 col-7 col-sm-6 col-xs-4 col-md-3 col-lg- col-xl-2 align-content-center">
+    <div class="form-check form-switch form-check-reverse tax-toggle-child align-item-center">
   <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
   <label class="form-check-label" for="flexSwitchCheckDefault">Display total before taxes</label>
-</div>
   </div>
+  </div> -->
 </div>
 </form>
 
