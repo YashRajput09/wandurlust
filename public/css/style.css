@@ -113,17 +113,15 @@ body{
 
 #map{
     width: 100%;
-    height: 50vh;
+    height: 35vh;
     border-radius: 10px;
 }
 
 /* category section styling */
 
 #filters {
-    max-height: 80px;
+    max-height: 85px;
     display: flex;
-    /* flex-wrap: wrap; */
-    /* margin-block:  1em; */
     align-items: center;
     overflow-x: auto;
   }
