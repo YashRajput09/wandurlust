@@ -23,61 +23,61 @@ body{
     font-size: 2rem;
 }
 
-.nav-link{
-    color: #222222 !important;
-    font-weight: 600 !important;
+ .navbar .nav-link{
+    color: #222222;
+    font-weight: 600;
     /* margin-inline:  .75rem !important; */
 }
 
-.search-btn {
-    background-color: #fe424d !important;
-    color: #fff !important;
-    display: flex !important;
-    align-items: center !important;
-    border-radius: 25px !important;
-    padding: 0 1rem !important;
+.navbar .search-btn {
+    background-color: #fe424d ;
+    color: #fff ;
+    display: flex;
+    align-items: center ;
+    border-radius: 25px;
+    padding: 0 1rem;
   }
-  .search-btn:hover {
-    background-color: #fe424d !important;
-    color: #fff !important;
+  .navbar .search-btn:hover {
+    background-color: #fe424d;
+    color: #fff;
   }
-  .search-btn i {
-    margin-right: 0.5rem !important;
+  .navbar .search-btn i {
+    margin-right: 0.5rem;
   }
 
-  .search-input {
-    border-radius: 25px !important;
-    padding: 0.5rem 3rem !important;
+  .navbar .search-input {
+    border-radius: 25px;
+    padding: 0.5rem 3rem;
   }
 
 /* cards */
 
-.listing-card{
-    padding: auto !important;
-    border: none !important;
+.container .listing-card{
+    padding: auto;
+    border: none;
     margin-bottom: 2rem;
-    /* width: 30 !important%; */
+    /* width: 30%; */
 }
 
-.card-img-top{
-    border-radius: 1rem !important;
+.container .card-img-top{
+    border-radius: 1rem;
     width: 100%;
-    object-fit: cover !important;
+    object-fit: cover;
 }
 
-.card-text{
-    font-weight: 400 !important;
+.container .card-text{
+    font-weight: 400;
 }
 
-.listing-links{
-    text-decoration: none !important;
+.container .listing-links{
+    text-decoration: none;
 }
 
 /* card effect */
-.card-img-overlay{
+.container .card-img-overlay{
     opacity: 0;
 }
-.card-img-overlay:hover{
+.container .card-img-overlay:hover{
     opacity: 0.2;
     background-color: #fff;
 }
@@ -110,14 +110,14 @@ body{
 }
 
 /* new.ejs file */
-.add-btn{
-    background-color: #fe424d !important;
-    color: #fff !important;
-    border: none !important;
+.row .add-btn{
+    background-color: #fe424d;
+    color: #fff;
+    border: none;
     /* transform: 2s; */
 }
-.add-btn:hover{
-    background-color: #e93632 !important;
+.row .add-btn:hover{
+    background-color: #e93632;
 }
 
 /* show.ejs file */
