@@ -6,6 +6,7 @@ const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapBoxToken = process.env.MAP_PUBLIC_TOKEN;
 const geocodingClient = mbxGeocoding({ accessToken: mapBoxToken });
 
+
 module.exports.index = async (req, res) => {
    // get value  of the search parameter from URL and store it in searchQuery variable
   const searchQuery = req.query.search || ''; // If search is undefined or null, set it to an empty string
@@ -28,16 +29,21 @@ module.exports.newListingForm = async(req, res) => {
 
 module.exports.showListing = async (req, res) => {
 const { id } = req.params;
-const listing = await Listing.findById(id)
+let listing;
+try{
+ listing = await Listing.findById(id)
 .populate({ path: "reviewDetails", populate: { path: "author" } })
 .populate("owner"); // populate() replace the ID with the actual document
 if (!listing) {
   req.flash("error", "Requested Listing is not found.");
   res.redirect("/listings");
-}
+  }
+  }catch(error){
+    console.error("Error retrieving listing:", error);
+    }
+    await handleSearch(req, res, Listing); //search and display listing when user search
+    res.render("listings/show.ejs", { listing });
 
-  await handleSearch(req, res, Listing); //search and display listing when user search
-  res.render("listings/show.ejs", { listing });
 
 };
 

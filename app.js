@@ -86,18 +86,19 @@ app.use((req, res, next) =>{
   res.locals.successMsg = req.flash("success");
   res.locals.errorMsg = req.flash("error");
   res.locals.currentUser = req.user;   //store to use in .ejs file, because locals  is accessible from all ejs files
+ debugger;
   next();
 }); 
 
-app.use('/listings', listingsRoute); //listings is require above
+app.use(['/listings', '/'], listingsRoute); //listings is require above
 app.use('/listings/:id/reviews', reviewsRoute); //
-app.use('/', userRoute);
+app.use('/user', userRoute);
 
 
 // if request is not match to any route the this  will execute
-app.use("*", (req, res, next) => {
-  next(new ExpressError(404, "Page Not Found"));
-});
+// app.use("*", (req, res, next) => {
+//   next(new ExpressError(404, "Page Not Found"));
+// });
 
 // error handling middleware
 // deconstruct the err and send res.

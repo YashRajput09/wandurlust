@@ -25,11 +25,11 @@
   class="container-fluid navbar navbar-expand-md bg-body-light sticky-top border-bottom px-md-4"
 >
   <div class="container-fluid bg-white rounded-3">
-    <a class="navbar-brand" href="/listings"
+    <a class="navbar-brand" href="/"
       ><i class="fa-regular fa-compass"></i
     ></a>
     <div class="navbar-nav">
-      <a class="nav-link" href="/listings">Wanderlust</a>
+      <a class="nav-link" href="/">Wanderlust</a>
     </div>
     <button
       class="navbar-toggler fa fa-bars fa-2"
@@ -58,10 +58,10 @@
       <div class="navbar-nav ms-auto">
         <a class="nav-link" href="/listings/new">AddYourHome</a>
         <% if(!currentUser){ %>
-        <a class="nav-link" href="/signup">SignUp</a>
-        <a class="nav-link" href="/login">Login</a>
+        <a class="nav-link" href="/user/signup">SignUp</a>
+        <a class="nav-link" href="/user/login">Login</a>
         <% } %> <% if(currentUser) {%>
-        <a class="nav-link" href="/logout">LogOut</a>
+        <a class="nav-link" href="/user/logout">LogOut</a>
         <% } %>
       </div>
     </div>

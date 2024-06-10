@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        
+        {
+            "type": "chrome",
+            "name": "http://localhost:8080/listings",
+            "request": "launch",
+            "url": "http://localhost:8080/listings"
+        }
+    ]
+}
