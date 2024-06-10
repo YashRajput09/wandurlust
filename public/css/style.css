@@ -29,6 +29,27 @@ body{
     /* margin-inline:  .75rem !important; */
 }
 
+.search-btn {
+    background-color: #fe424d !important;
+    color: #fff !important;
+    display: flex !important;
+    align-items: center !important;
+    border-radius: 25px !important;
+    padding: 0 1rem !important;
+  }
+  .search-btn:hover {
+    background-color: #fe424d !important;
+    color: #fff !important;
+  }
+  .search-btn i {
+    margin-right: 0.5rem !important;
+  }
+
+  .search-input {
+    border-radius: 25px !important;
+    padding: 0.5rem 3rem !important;
+  }
+
 /* cards */
 
 .listing-card{
