@@ -6,7 +6,9 @@ const userSchema = new Schema({
     email: {
         type: String,
         required: true,
-    }
+    },
+    resetPasswordToken: String,
+    resetPasswordExpires: Date
     // there is no need to define other  fields like username and password 
     // because 'passport-local-mongoose' will automatically add
 });

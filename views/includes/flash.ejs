@@ -13,3 +13,11 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" area-label="Close"></button>
         </div>
     <% } %>
+
+            <!-- for information message  -->
+<% if(infoMsg && infoMsg.length){ %>
+    <div class="alert alert-primary alert-dismissible fade show col-6 offset-3" role="alert">
+        <%= infoMsg %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" area-label="Close"></button>
+    </div>
+<% } %>

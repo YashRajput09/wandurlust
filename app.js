@@ -85,6 +85,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next) =>{
   res.locals.successMsg = req.flash("success");
   res.locals.errorMsg = req.flash("error");
+  res.locals.infoMsg = req.flash("info");
   res.locals.currentUser = req.user;   //store to use in .ejs file, because locals  is accessible from all ejs files
  debugger;
   next();
