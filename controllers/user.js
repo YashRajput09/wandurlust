@@ -150,8 +150,6 @@ module.exports.resetPassword = (req, res, next) =>{
             .catch(err =>{
               return next(err);
             });
-          // user.save(err =>{
-          // });
         });
       }
       else{

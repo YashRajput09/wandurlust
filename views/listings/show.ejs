@@ -40,7 +40,49 @@
       </form>
     </div>
     <% } %>
+
+    <!-- share button -->
+    <div class="btns">
+      <button type="button" class="btn btn-primary col-xs-2 col-sm-2 col-md-3 col-lg-3 mt-3" data-bs-toggle="modal" data-bs-target="#shareModal">
+        Share listing
+      </button>
+    </div>
+    
+    <!-- Share Modal -->
+    <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="shareModalLabel">Share this listing</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Choose a platform to share:</p>
+            <div class="d-flex justify-content-between">
+              <!-- The URL for sharing -->
+              
+              <a href="https://api.whatsapp.com/send?text=Copy link and past into the browser if it is not clickable on your device: <%= encodeURIComponent( url )%>" class="btn btn-success" target="_blank">
+                WhatsApp
+            </a>
+            
+              <!-- <a href="https://api.whatsapp.com/send?text=If the link is not clickable on your device then copy the link and paste it in the browser: <%# protocol %>://<%# host %>/listings/<%# listing._id %>" class="btn btn-success" target="_blank">
+                WhatsApp
+              </a> -->
+              <a href="https://www.facebook.com/sharer/sharer.php?u= <%= encodeURIComponent(url) %>" class="btn btn-primary" target="_blank">
+
+                  Facebook
+              </a>
+              <a href="https://twitter.com/intent/tweet?url= <%= encodeURIComponent(url) %> &text=Check out this listing!" class="btn btn-dark" target="_blank">
+                  Twitter
+              </a>
+             
+            </div>
+          </div>
+      </div>
   </div>
+</div>
+
+      </div>
 
   <!-- map -->
   <div class="offset-md-1 offset-lg-2 col-xs-12 col-sm-12 col-md-10 col-lg-8 mb-3">
